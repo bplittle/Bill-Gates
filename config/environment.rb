@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'pg'
+require 'stripe'
 
 require 'active_support/all'
+require 'mail'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'

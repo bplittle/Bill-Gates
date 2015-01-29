@@ -14,13 +14,9 @@ configure do
   host: 'ec2-184-73-165-193.compute-1.amazonaws.com',
   port: 5432,
   min_messages: 'error'
-)
+}
 puts "CONNECTED"
 
-puts "Setting up Database (recreating tables) ..."
-
-
-puts "Setup DONE"
 
   # Load all models from app/models, using autoload instead of require
   # See http://www.rubyinside.com/ruby-techniques-revealed-autoload-1652.html
