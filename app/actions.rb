@@ -44,12 +44,17 @@ post '/home/create' do
         event_url: params[:event_url],
         unit_price: params[:unit_price])
 
-        event.save
+    new_event.save
 
-        params[:emails].each do |email|
-            follower = Follower.create(email: email, event_id: new_event.id)
-            follower.save
-        end
+    emails = params[:emails].split(', ')
+    emails.each do |email|
+        follower = Follower.create(follower_email: email, event_id: new_event.id)
+        follower.save
+    end
+
+    redirect '/'
+
+    # binding.pry
     
     # Send emails to followers with that event id
 end
@@ -73,11 +78,11 @@ post '/home/:event_id/:follower_id' do
     # redirect '/thank_you'
 end
 
-get '/thank_you'
+get '/thank_you' do
     erb :thank_you
 end
 
-get '/why'
+get '/why' do
     erb :why
 end
 
