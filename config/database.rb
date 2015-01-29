@@ -5,9 +5,22 @@ configure do
   end
 
   set :database, {
-    adapter: "sqlite3",
-    database: "db/db.sqlite3"
-  }
+  adapter: 'postgresql',
+  encoding: 'unicode',
+  pool: 5,
+  database: 'd7s748bu40hutt',
+  username: 'vxbsgvrbpnsesf',
+  password: '2MU3GXeMRa3VyzdL49czc6iUvC',
+  host: 'ec2-184-73-165-193.compute-1.amazonaws.com',
+  port: 5432,
+  min_messages: 'error'
+)
+puts "CONNECTED"
+
+puts "Setting up Database (recreating tables) ..."
+
+
+puts "Setup DONE"
 
   # Load all models from app/models, using autoload instead of require
   # See http://www.rubyinside.com/ruby-techniques-revealed-autoload-1652.html
@@ -17,3 +30,7 @@ configure do
   end
 
 end
+
+
+# Psql    heroku pg:psql --app heroku-postgres-81859dbe HEROKU_POSTGRESQL_CHARCOAL
+
