@@ -27,3 +27,5 @@ puts "CONNECTED"
 
 end
 
+#heroku pg:psql --app heroku-postgres-81859dbe HEROKU_POSTGRESQL_CHARCOAL
+
