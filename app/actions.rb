@@ -36,17 +36,22 @@ end
 post '/home/create' do
     #form fields into new event
 
-    # new_event = Event.create(
-    #     event_name: params[:name],
-    #     date: params[:date],
-    #     time: params[:time],
-    #     location: params[:location],
-    #     event_url: params[:event_url],
-    #     unit_price: params[:unit_price])
+    new_event = Event.create(
+        event_name: params[:name],
+        date: params[:date],
+        time: params[:time],
+        location: params[:location],
+        event_url: params[:event_url],
+        unit_price: params[:unit_price])
 
-    # if event.save
-    #     redirect '/home'
-    # end
+        event.save
+
+        params[:emails].each do |email|
+            follower = Follower.create(email: email, event_id: new_event.id)
+            follower.save
+        end
+    
+    # Send emails to followers with that event id
 end
 
 
@@ -54,11 +59,11 @@ get '/home/event/:event_id' do
     erb :'home/event/event_id'
 end
 
-get 'home/:event_id/:follower_id' do
+get '/home/:event_id/:follower_id' do
     erb :'home/event_id/follower_id'
 end
 
-post 'home/:event_id/:follower_id' do
+post '/home/:event_id/:follower_id' do
     # follower = Follower.where(event_id: params[:event_id], id: params[:id])
     # follower[:unit_quantity] = params[:unit_quantity]
     # follower[:unit_total_price] = follower[:unit_quantity] * follower.event.unit_price
