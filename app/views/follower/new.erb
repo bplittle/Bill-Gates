@@ -1,0 +1,24 @@
+<form method='post' action="/events/<%= @event_id %>/<%= @follower_id %>">
+
+<h2><u>Pre-Auth / Confirmation Page</u></h2>
+
+<form>
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" name="name">
+    </div>
+     <div>
+        <%= "Unit Price:" + @unit_price.to_s + " Total Price: ....." %>
+    </div>
+    <div class="form-group">
+        <label>Ticket Quantity:</label>
+        <input type="text" name="unit_quantity">
+    </div>     
+    <!-- <div class="form-group">
+        <label>Event URL:</label>
+        <input type="text" name="event_url">
+    </div>  -->
+    <div>
+    <input type="submit" value="Submit" >
+  </div>
+</form>

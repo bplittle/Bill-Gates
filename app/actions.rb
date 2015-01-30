@@ -25,15 +25,15 @@ post '/new_user' do
     
 end
 
-get '/home' do
-    erb :home
+get '/events' do
+    erb :index
 end
 
-get '/home/create' do
-    erb :'home/create'
+get '/events/new' do
+    erb :'events/new'
 end
 
-post '/home/create' do
+post '/events/new' do
     #form fields into new event
 
     new_event = Event.create(
@@ -60,30 +60,35 @@ post '/home/create' do
 end
 
 
-get '/home/event/:event_id' do
-    erb :'home/event/event_id'
+get '/events/:event_id' do
+    erb :'events/show'
 end
 
-get '/home/:event_id/:follower_id' do
-    erb :'home/event_id/follower_id'
+get '/events/:event_id/:follower_id' do
+    @unit_price = Event.find(params[:event_id]).unit_price
+    @event_id = params[:event_id]
+    @follower_id = params[:follower_id]
+    erb :'follower/new'
 end
 
-post '/home/:event_id/:follower_id' do
-    # follower = Follower.where(event_id: params[:event_id], id: params[:id])
-    # follower[:unit_quantity] = params[:unit_quantity]
-    # follower[:unit_total_price] = follower[:unit_quantity] * follower.event.unit_price
-    # # follower[:stripe_token] = params[:stripe_token]
-    # #follower[:status] = 
-
-    # redirect '/thank_you'
+post '/events/:event_id/:follower_id' do
+    follower = Follower.where(event_id: params[:event_id], id: params[:follower_id]).first
+    follower[:follower_name] = params[:name].to_s
+    follower[:unit_quantity] = params[:unit_quantity].to_i
+    follower[:unit_total_price] = follower[:unit_quantity].to_i * Event.find(params[:event_id]).unit_price
+    follower[:stripe_token] = params[:stripe_token]
+    follower[:status] = params[:status]
+    follower.save
+     p follower[:follower_name]
+     
 end
 
 get '/thank_you' do
     erb :thank_you
 end
 
-get '/why' do
-    erb :why
+get '/about' do
+    erb :about
 end
 
 
