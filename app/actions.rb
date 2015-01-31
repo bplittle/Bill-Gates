@@ -65,7 +65,19 @@ end
 
 
 get '/events/:event_id' do
+
+		@event = Event.find(params[:event_id])
+
     erb :'events/show'
+end
+
+post '/events/:event_id/decline/:follower_id' do
+
+	follower = Follower.where(event_id: params[:event_id], id: params[:follower_id]).first
+	follower[:status] = "declined"
+
+	redirect '/events'
+
 end
 
 post '/events/:event_id/:follower_id' do
@@ -103,11 +115,10 @@ p token
 
 
  	follower[:stripe_token] = charge.id
- 	follower.save!
- 	puts "success"
-
- 	p charge.inspect
-
+ 	if follower.save
+ 		follower[:status] = "confirmed"
+ 		puts "success"
+ 	end
 
   redirect '/events'
      

@@ -1,6 +1,19 @@
-<form method='post' action="/events">
+<div>
+    <% @event.followers.each do |follower| %>
+    <div>
+        <%= follower.follower_name %>
+        <%= follower.follower_email %>
+        <%= follower.unit_quantity %>
+        <% if follower.status != nil %>
+            <%= follower.status %>
+        <% end %>
+    <% end %>
+    </div>
+</div>
+    <form method='post' action="/events">
 <form>
   <div>
-    <input type="submit" value="Submit" >
+  <p>Bought the tickets? Receive your friends' payments:</p><br>
+    <input type="submit" value="Receive Payback" >
   </div>
 </form>
