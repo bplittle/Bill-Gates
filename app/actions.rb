@@ -7,8 +7,40 @@ get '/' do
   erb :index
 end
 
-get '/sign_up' do
-    erb :sign_up
+post '/' do 
+    leader = Leader.find_by(leader_email: params[:leader_email])
+
+    if params[:password] == leader[:password]
+        session[:leader_id] = leader.id
+        redirect '/events'
+    else
+        redirect '/'
+    end
+end
+
+get '/logout' do
+    session.clear
+    redirect '/'
+end
+
+get '/leader/new' do
+    erb :'leader/new'
+end
+
+post '/leader/new' do
+
+    leader = Leader.new(
+        leader_name: params[:leader_name],
+        leader_email: parmas[:leader_email],
+        password: params[:password],
+        leader_stripe_key: params[:api_key])
+
+    if leader.save
+        session[:leader_id] = leader[:id]
+        redirect '/events'
+    else
+        redirect '/leader/new'
+    end
 end
 
 post '/new_user' do

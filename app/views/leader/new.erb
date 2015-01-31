@@ -1,0 +1,32 @@
+<div class="logo">    
+    <img class = "logo_img" src="/assets/images/bill-gates-logo.png">
+  </div>
+
+
+  <div class="container"> 
+    <div class="row"> 
+      
+  
+      <form class="form-signin" method="POST" action="/leader/new">
+        <h2 class="form-signin-heading">Please sign up</h2>
+        <label class="sr-only" for="leader_name">Full Name:</label>
+        <input class="form-control" type="text" name="leader_name" placeholder="Name"><br><br>
+
+        <label class="sr-only" for="leader_email">Email:</label>
+        <input class="form-control" type="text" name="leader_email" placeholder="Email"><br><br>
+
+        <label class="sr-only" for="password">Password:</label>
+        <input class="form-control" type="password" name="password" placeholder="Password"><br><br>
+
+        <label class="sr-only" for="api_key">Stripe API Key:</label>
+        <input class="form-control" type="text" name="api_key" placeholder="Stripe API Key:"><br><br>
+
+        <input class="btn-danger btn" type="submit" value="Login">
+
+        <p class="text-center"> Log in if you already have an account: </p>
+        <p class="text-center"><a href="/">Log In</a></p>  
+      </form>
+        
+      
+    </div>
+  </div>
