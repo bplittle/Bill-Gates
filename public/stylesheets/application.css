@@ -1,5 +1,4 @@
 .row {
- 
   text-align: center;
 }
 
@@ -16,7 +15,8 @@
 
 
 .logo_img {
-  width: 750px;
+  width: 50%;
+  min-width: 200px;
   padding-left: 10px;
   padding-top: 20px;
 }
@@ -36,4 +36,3 @@
 .form-control {
   background-color: white;
 }
-
