@@ -71,10 +71,24 @@ get '/events/:event_id' do
     erb :'events/show'
 end
 
+post '/events/:event_id' do
+ 
+## take payment from folloewrs
+	event = Event.find(params[:id])
+
+	event.followers.each do |follower|
+		follower[:stripe_token].capture
+	end
+
+	redirect '/events'
+
+end
+
 post '/events/:event_id/decline/:follower_id' do
 
 	follower = Follower.where(event_id: params[:event_id], id: params[:follower_id]).first
 	follower[:status] = "declined"
+	follower.save!
 
 	redirect '/events'
 
