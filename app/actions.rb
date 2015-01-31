@@ -1,4 +1,8 @@
 # Homepage (Root path)
+require "stripe"
+
+
+
 get '/' do
   erb :index
 end
@@ -64,6 +68,64 @@ get '/events/:event_id' do
     erb :'events/show'
 end
 
+post '/events/:event_id/:follower_id' do
+# binding.pry
+follower = Follower.where(event_id: params[:event_id], id: params[:follower_id]).first
+follower[:follower_name] = params[:name].to_s
+follower[:unit_quantity] = params[:unit_quantity].to_i
+follower[:unit_total_price] = follower[:unit_quantity].to_i * Event.find(params[:event_id]).unit_price
+follower[:status] = params[:status]
+
+ p follower[:follower_name]
+
+       @amount = 2000
+
+ Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+
+ puts "strike api key received"
+
+# Get the credit card details submitted by the form
+token = params[:stripeToken]
+p token
+
+# Create the charge on Stripe's servers - this will charge the user's card
+
+  charge = Stripe::Charge.create(
+    :amount => 1000, # amount in cents, again
+    :currency => "cad",
+    :card => token,
+    :description => "payinguser@example.com",
+    :capture => false
+  )
+# rescue Stripe::CardError => e
+#   # The card has been declined
+
+
+
+ 	follower[:stripe_token] = charge.id
+ 	follower.save!
+ 	puts "success"
+
+ 	p charge.inspect
+
+
+  redirect '/events'
+     
+end
+
+post '/events' do
+	#add id back in later to specify event
+
+	Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+
+	ch = Stripe::Charge.retrieve("ch_15QoUXFR7CapK6EtvYMQZC2P")
+	binding.pry
+	ch.capture
+
+	redirect '/'
+
+end
+
 get '/events/:event_id/:follower_id' do
     @unit_price = Event.find(params[:event_id]).unit_price
     @event_id = params[:event_id]
@@ -71,17 +133,7 @@ get '/events/:event_id/:follower_id' do
     erb :'follower/new'
 end
 
-post '/events/:event_id/:follower_id' do
-    follower = Follower.where(event_id: params[:event_id], id: params[:follower_id]).first
-    follower[:follower_name] = params[:name].to_s
-    follower[:unit_quantity] = params[:unit_quantity].to_i
-    follower[:unit_total_price] = follower[:unit_quantity].to_i * Event.find(params[:event_id]).unit_price
-    follower[:stripe_token] = params[:stripe_token]
-    follower[:status] = params[:status]
-    follower.save
-     p follower[:follower_name]
-     
-end
+
 
 get '/thank_you' do
     erb :thank_you
