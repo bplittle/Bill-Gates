@@ -1,3 +1,10 @@
+
+.header {
+  height: 120px;
+  background: linear-gradient(#ff3399, #a90329);
+  border-bottom: 5px solid #aa3333;
+}
+
 .row {
   text-align: center;
 }
