@@ -1,16 +1,21 @@
+<h1><%= @event.event_name %></h1>
+<h3><%= @event.date %></h3>
+<h3><%= @event.time %></h3>
+<h3><%= @event.location %></h3>
+
 <div>
     <% @event.followers.each do |follower| %>
     <div>
-        <%= follower.follower_name %>
-        <%= follower.follower_email %>
-        <%= follower.unit_quantity %>
+        <br>Name: <%= follower.follower_name %>
+        <br>Email: <%= follower.follower_email %>
+        <br>Tickets: <%= follower.unit_quantity %>
         <% if follower.status != nil %>
-            <%= follower.status %>
-        <% end %>
+            Status: <br><%= follower.status %>
+        <% end %><br><br>        
     <% end %>
     </div>
 </div>
-    <form method='post' action="/events">
+    <form method='post' action="/events/<%= @event.id %>">
 <form>
   <div>
   <p>Bought the tickets? Receive your friends' payments:</p><br>
