@@ -1,0 +1,39 @@
+.row {
+ 
+  text-align: center;
+}
+
+.input-group {
+  text-align: center;
+}
+
+.form-signin {
+  margin: 0 auto;
+  width: 20%;
+  min-width: 150px;
+  margin-top: -50px;
+}
+
+
+.logo_img {
+  width: 750px;
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
+.logo-name {
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-size: 30px;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: 100;
+  line-height: 33px;
+  overflow: visible;
+  margin-left: 200px;
+  padding-top: 100px;
+}
+
+.form-control {
+  background-color: white;
+}
+
