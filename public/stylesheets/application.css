@@ -1,8 +1,14 @@
 
-.header {
-  height: 120px;
-  background: linear-gradient(#ff3399, #a90329);
-  border-bottom: 5px solid #aa3333;
+
+
+.footer-main {
+  width:100%;
+  height:80px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background-color: #131313;
+ 
 }
 
 .row {
@@ -18,7 +24,10 @@
   width: 20%;
   min-width: 150px;
   margin-top: -50px;
+  background-color: gray;
 }
+
+
 
 
 .logo_img {
