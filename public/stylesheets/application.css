@@ -16,16 +16,9 @@
 
 
 .logo_img {
-  width: 250px;
+  width: 750px;
   padding-left: 10px;
   padding-top: 20px;
-}
-
-.logo {
-  width: 300px;
-  height: 310px;
-  background-color: #c12e2a;
-  border-radius: 80%;
 }
 
 .logo-name {
