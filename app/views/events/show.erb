@@ -12,7 +12,12 @@
         <br>Tickets: <%= follower.unit_quantity %>
         <% if follower.status != nil %>
            <br> Status: <%= follower.status %>
-        <% end %><br><br>        
+        <% end %>
+        <% if follower.status == "confirmed"%>
+          <br> Pre-Authorized Amount: $<%= follower.unit_total_price%>
+        <%end%>
+        <br><br>
+
     <% end %>
     </div>
 </div>
@@ -22,6 +27,7 @@
   <form>
     <div>
     <p>Bought the tickets? Receive your friends' payments:</p><br>
+    <p>Total amount pre-authorized: $<%=@event.followers.sum(:unit_total_price)%></p>
       <input type="submit" value="Receive Payback" >
     </div>
   </form>

@@ -1,10 +1,11 @@
 .header-main {
-  height: 118px;
-  background: linear-gradient(#ff0000, #8f0222);
+  height: 60px;
 }
 
 .navbar, .navbar-default, .navbar-fixed-top {
   min-height: 10px;
+  margin-top: -50px;
+  background: linear-gradient(#ff0000, #8f0222);
 }
 
 .navbar-right {
@@ -29,14 +30,15 @@ html, body {
   margin: 0 auto;
   width: 20%;
   min-width: 150px;
-  margin-top: -50px;
+  /*margin-top: -50px;*/
 }
 
 .logo_img {
   width: 50%;
+  top: -100px;
+  position: relative;
   min-width: 200px;
   padding-left: 10px;
-  padding-top: 120px;
   float: left;
 }
 
