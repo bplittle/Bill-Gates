@@ -25,7 +25,11 @@
   <title>Bill 'Gates'</title>
 </head>
 <body>
-  <div class="header">This is the header  
+  <div class="header">This is the header 
+  <% if session[:leader_id] %>
+    <% leader = Leader.find(session[:leader_id]) %>
+    <%= leader.leader_name %>
+  <% end %>
   </div>
 
   <%= yield %>

@@ -78,7 +78,8 @@ post '/events/new' do
         time: params[:time],
         location: params[:location],
         event_url: params[:event_url],
-        unit_price: params[:unit_price])
+        unit_price: params[:unit_price],
+        leader_id: session[:leader_id])
 
     new_event.save
 
@@ -88,7 +89,7 @@ post '/events/new' do
         follower.save
     end
 
-    redirect '/event'
+    redirect '/events/' + new_event.id.to_s
 
     # binding.pry
     
@@ -109,7 +110,7 @@ post '/events/:event_id/decline/:follower_id' do
 	follower[:status] = "declined"
 	follower.save!
 
-	redirect '/events'
+	redirect '/thank_you'
 
 end
 
@@ -123,9 +124,14 @@ post '/events/:event_id/:follower_id' do
 
      p follower[:follower_name]
 
-           @amount = 2000
 
-     Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+    event = Event.find(params[:event_id])
+    user = event.leader
+    binding.pry
+    Stripe.api_key = user.leader_stripe_key
+    
+
+     # Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
 
      puts "strike api key received"
 
@@ -148,29 +154,36 @@ post '/events/:event_id/:follower_id' do
 
  	follower[:stripe_token] = charge.id
 	follower[:status] = "confirmed"
+    follower.save!
 	puts "success"
+    # binding.pry
  	
-
-  redirect '/events'
+    # redirect '/'
+  redirect '/events/' + params[:event_id]
      
 end
 
 post '/events/:event_id' do
 	event = Event.find(params[:event_id])
 
-	Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+    user = Leader.find(session[:leader_id])
+    Stripe.api_key = user.leader_stripe_key
+
+	# Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
 
     event.followers.each do |follower|
-        charge_token = follower[:stripe_token]
-        ch = Stripe::Charge.retrieve(charge_token)
-        ch.capture
+         if follower[:stripe_token] != nil   
+            charge_token = follower[:stripe_token]
+            ch = Stripe::Charge.retrieve(charge_token)
+            ch.capture  
+        end
     end
 
 	# ch = Stripe::Charge.retrieve("ch_15QoUXFR7CapK6EtvYMQZC2P")
 	# binding.pry
 	# ch.capture
 
-	redirect '/'
+	redirect '/events/' + params[:event_id]
 
 end
 
