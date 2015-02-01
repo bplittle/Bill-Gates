@@ -4,7 +4,7 @@ require 'pg'
 require 'stripe'
 
 require 'active_support/all'
-require 'mail'
+require 'mandrill'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'

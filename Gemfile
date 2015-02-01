@@ -12,7 +12,7 @@ gem 'pg'
 
 gem 'puma'
 gem 'tux'
-gem 'mail'
+gem 'mandrill-api'
 
 group :development, :test do
   gem 'pry'
