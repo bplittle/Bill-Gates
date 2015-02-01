@@ -43,7 +43,8 @@
     });
   </script>
 
-
+<% follower = Follower.find(@follower_id) %>
+<h3>Hi, <%= follower[:follower_email] %></h3>
 <form method='post' action="/events/<%= @event_id %>/<%= @follower_id %>" id="payment-form">
 
 <h2><u>Pre-Auth / Confirmation Page</u></h2>

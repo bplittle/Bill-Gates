@@ -26,6 +26,10 @@
 </head>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="header-main">
+      <% if session[:leader_id] %>
+        <% leader = Leader.find(session[:leader_id]) %>
+        <%= leader.leader_name %>
+      <% end %>
       <nav><button class="navbar-right"><a>Manage events</a></button></nav>
       <nav><button class="navbar-right"><a>Create a new event</a></button></nav>
       <nav><button class="navbar-right"><a>About Us</a></button></nav>
