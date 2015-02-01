@@ -6,6 +6,8 @@
  
   <!-- jQuery is used only for this example; it isn't required to use Stripe -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
  
   <script type="text/javascript">
     // This identifies your website in the createToken call below
@@ -43,6 +45,24 @@
     });
   </script>
 
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var unit_price = <%=@unit_price%>;
+    var unit_quantity = $(".unit_quantity").val();
+    $(".total_price").text("$" + (unit_price * unit_quantity).toFixed(2));
+
+      $(".unit_quantity").change(function() {
+        var change = $(".unit_quantity").val();
+        // var unit_quantity = $(".unit_quantity").value;
+        // $("total_price").text($(".unit_quantity").value() * unit_price);
+        $(".total_price").text("$" + (unit_price * change).toFixed(2));
+        // $(".total_price").text(change);
+
+      });
+
+  });
+  </script>
+
 <% follower = Follower.find(@follower_id) %>
 <h3>Hi, <%= follower[:follower_email] %></h3>
 <form method='post' action="/events/<%= @event_id %>/<%= @follower_id %>" id="payment-form">
@@ -55,11 +75,13 @@
         <input type="text" name="name" required>
     </div>
      <div>
-        <%= "Unit Price:" + @unit_price.to_s + " Total Price: ....." %>
+        <%= "Unit Price:" + @unit_price.to_s%> 
+        <label>Total Price</label>
+        <label class="total_price"></label>
     </div>
     <div class="form-group">
         <label>Ticket Quantity:</label>
-        <input type="text" name="unit_quantity" required>
+        <input type="number" name="unit_quantity" value=1 class="unit_quantity" required>
     </div> 
     <div class="form-group">
         <label>Credit Card Number:</label>
