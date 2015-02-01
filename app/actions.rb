@@ -62,6 +62,7 @@ post '/new_user' do
 end
 
 get '/events' do
+    @leader = Leader.find(session[:leader_id])
     erb :events
 end
 
@@ -103,7 +104,7 @@ post '/events/new' do
             from_email: "noreply@billg8.es"
 
         }
-        binding.pry
+        # binding.pry
 
         sending = m.messages.send message
 
@@ -152,7 +153,7 @@ post '/events/:event_id/:follower_id' do
 
     event = Event.find(params[:event_id])
     user = event.leader
-    binding.pry
+    # binding.pry
     Stripe.api_key = user.leader_stripe_key
     
 
@@ -162,12 +163,13 @@ post '/events/:event_id/:follower_id' do
 
     # Get the credit card details submitted by the form
     token = params[:stripeToken]
-    p token
+    total_price = follower[:unit_total_price] * 100
+
 
     # Create the charge on Stripe's servers - this will charge the user's card
 
       charge = Stripe::Charge.create(
-        :amount => 1000, # amount in cents, again
+        :amount => total_price, # amount in cents, again
         :currency => "cad",
         :card => token,
         :description => "payinguser@example.com",
@@ -183,13 +185,14 @@ post '/events/:event_id/:follower_id' do
 	puts "success"
     # binding.pry
  	
-    # redirect '/'
-  redirect '/events/' + params[:event_id]
+    redirect '/thank_you'
+  # redirect '/events/' + params[:event_id]
      
 end
 
 post '/events/:event_id' do
 	event = Event.find(params[:event_id])
+
 
     user = Leader.find(session[:leader_id])
     Stripe.api_key = user.leader_stripe_key
@@ -203,6 +206,10 @@ post '/events/:event_id' do
             ch.capture  
         end
     end
+
+    event.captured_status = true
+    event.save!
+
 
 	# ch = Stripe::Charge.retrieve("ch_15QoUXFR7CapK6EtvYMQZC2P")
 	# binding.pry

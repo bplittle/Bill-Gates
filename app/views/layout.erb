@@ -30,16 +30,25 @@
     <div class="header-main">
       <% if session[:leader_id] %>
         <% leader = Leader.find(session[:leader_id]) %>
-        <%= leader.leader_name %>
+        <h3>Welcome, <%= leader.leader_name %></h3>
       <% end %>
-      <nav><button class="navbar-right"><a href="/events/">Manage events</a></button></nav>
-      <nav><button class="navbar-right"><a>Create a new event</a></button></nav>
+      <% if session[:leader_id] %>
+        <nav><button class="navbar-right"><a href="/events">Manage events</a></button></nav>
+        <nav><button class="navbar-right"><a href="/events/new">Create a new event</a></button></nav>
+      <% end %>
       <nav><button class="navbar-right"><a>About Us</a></button></nav>
       <nav><button class="navbar-right"><a>FAQ</a></button></nav>
+      <% if session[:leader_id] %>
+        <nav><button class="navbar-left"><a href="/logout">Logout</a></button></nav>
+      <% else %>
+        <nav><button class="navbar-left"><a href="/">Log In</a></button></nav>
+      <% end %>
     </div>
   </nav>
 <body>
+<br><br><br><br><br><br><br><br><br><br>
   <%= yield %>
+  <br><br>
 </body>
   <div>
     <div class="footer-main">

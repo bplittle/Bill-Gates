@@ -1,4 +1,18 @@
-<h1>Your Events</h1>
-
-
 <br><a href="/events/new">Create a New Event</a>
+
+<h1><u>Your Events</u></h1>
+
+<div>
+    <% @leader.events.each do |event| %>
+    <div>
+
+        <br><h3>Event Name: <%= event.event_name %></h3>
+        <a href="/events/<%= event.id %>"> Event Details</a>
+        <br>Location: <%= event.location %>
+        <br>Date: <%= event.date %>
+        <br>Time: <%= event.date %>
+        <br># Invited: <%= event.followers.count %>
+       
+    <% end %>
+    </div>
+</div>
