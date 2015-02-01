@@ -30,7 +30,7 @@
         <% leader = Leader.find(session[:leader_id]) %>
         <%= leader.leader_name %>
       <% end %>
-      <nav><button class="navbar-right"><a>Manage events</a></button></nav>
+      <nav><button class="navbar-right"><a href="/events/">Manage events</a></button></nav>
       <nav><button class="navbar-right"><a>Create a new event</a></button></nav>
       <nav><button class="navbar-right"><a>About Us</a></button></nav>
       <nav><button class="navbar-right"><a>FAQ</a></button></nav>
@@ -42,7 +42,6 @@
   <div>
     <div class="footer-main">
       <p class="footer-text">The Bill Gates App</p>
-      <p class="footer-text">-</p>
       <p class="footer-text">Powered by Billify!</p>
     </div>
   </div>
