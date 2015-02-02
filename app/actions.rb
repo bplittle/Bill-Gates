@@ -219,7 +219,7 @@ post '/events/:event_id' do
 	# binding.pry
 	# ch.capture
 
-	redirect '/events/' + params[:event_id]
+	redirect '/events'
 
 end
 
