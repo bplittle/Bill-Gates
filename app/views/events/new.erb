@@ -1,37 +1,44 @@
-<form method='post' action="/events/new">
 
-<h2><u>Add a New Event</u></h2>
+<div class="new_event_form" >
 
-<form>
+    <div class="new_event_title">
+      <h2>Invite friends to a new event</h2>
+    </div>
+
+
+<form class="form-horizontal" method='post' action="/events/new">
+
+<!-- <form> -->
     <div class="form-group">
-        <label>Name:</label>
-        <input type="text" name="name">
+        <label class="col-sm-4 control-label new_event_label">Name:</label>
+        <input class="new_event_input" type="text" name="name">
     </div>
     <div class="form-group">
-        <label>Date:</label>
-        <input type="text" name="date">
+        <label class="col-sm-4 control-label new_event_label">Date:</label>   
+        <input class="new_event_input" type="text" name="date">
     </div>  
     <div class="form-group">
-        <label>Time:</label>
-        <input type="text" name="time">
+        <label class="col-sm-4 control-label new_event_label">Time:</label>  
+        <input class="new_event_input" type="text" name="time">
     </div>
     <div class="form-group">
-        <label>Location:</label>
-        <input type="text" name="location">
+        <label class="col-sm-4 control-label new_event_label">Location:</label>   
+        <input class="new_event_input" type="text" name="location">
     </div> 
     <div class="form-group">
-        <label>Event URL:</label>
-        <input type="text" name="event_url">
+        <label class="col-sm-4 control-label new_event_label">Event URL:</label>  
+        <input class="new_event_input" type="text" name="event_url">
     </div> 
     <div class="form-group">
-        <label>Ticket Price:</label>
-        <input type="text" name="unit_price">
+        <label class="col-sm-4 control-label new_event_label">Ticket Price: $</label>  
+        <input class="new_event_input" type="text" name="unit_price">
     </div>
     <div class="form-group">
-        <label>Invite Your Friends (enter emails separated by commas):</label>
-        <input type="text" name="emails">
-    </div> 
-    <div>
-    <input type="submit" value="Submit" >
-  </div>
+        <label class="col-sm-4 control-label new_event_label">Invite Your Friends:</label>   
+        <input class="new_event_input" type="text" name="emails" placeholder="Separate emails by comma">
+    </div>
+    <div class="form-group"> 
+    <input class="new_event_input submit_button" type="submit" value="Submit" >
+    </div>
 </form>
+</div>
