@@ -93,16 +93,19 @@ post '/events/new' do
         m = Mandrill::API.new 'ASPCt1fLpFwKfE7g9rMo9Q'
 
         message = {
-            subject: new_event.leader.leader_name + "has invited you to " + new_event.event_name ,
+            subject: new_event.leader.leader_name + " has invited you to " + new_event.event_name ,
             from_name: new_event.leader.leader_name,
             text: "Want to come to " + new_event.event_name + "?",
             to: [
                 {email: email,
                     name: "Friend of " + new_event.leader.leader_name
                     }],
-            html: "<html><h1> Want to come to this event? Visit below url for details: </h1> 
-           localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
-            from_email: "noreply@billg8.es"
+            html: "<html><h1> Want to come to " + new_event.event_name + " ?</h1> 
+            <br>Location: " + new_event.location + "
+            <br>Date: " + new_event.date + "
+            <br>Visit the below url to pre-authorize payback to your friend who will be buying your tickets. Only once they buy and provide you with your ticket will you be charged. 
+            <br>localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
+            from_email: new_event.leader.leader_email
 
         }
         # binding.pry
