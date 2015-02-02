@@ -64,54 +64,63 @@
   </script>
 
 <% follower = Follower.find(@follower_id) %>
-<h3>Hi, <%= follower[:follower_email] %></h3>
-<form method='post' action="/events/<%= @event_id %>/<%= @follower_id %>" id="payment-form">
 
-<h2><u>Pre-Auth / Confirmation Page</u></h2>
-
-<form>
-    <div class="form-group">
-        <label>Name:</label>
-        <input type="text" name="name" required>
-    </div>
-     <div>
-        <%= "Unit Price: $" + @unit_price.to_s%> 
-        <label>Total Price</label>
-        <label class="total_price"></label>
-    </div>
-    <div class="form-group">
-        <label>Ticket Quantity:</label>
-        <input type="number" name="unit_quantity" value=1 class="unit_quantity" required>
-    </div> 
-    <div class="form-group">
-        <label>Credit Card Number:</label>
-        <input type="text" data-stripe="number" required>
-    </div>
-    <div class="form-group">
-        <label>CVC:</label>
-        <input type="text" data-stripe="cvc" required>
-    </div>
-    <div class="form-group">
-        <label>Expiration Month:</label>
-        <input type="text" data-stripe="exp-month" required>
-    </div>  
-    <div class="form-group">
-        <label>Expiration Year:</label>
-        <input type="text" data-stripe="exp-year" required>
-    </div>     
-   
-    <!-- <div class="form-group">
-        <label>Event URL:</label>
-        <input type="text" name="event_url">
-    </div>  -->
-    <div>
-    <input type="submit" value="Submit" >
+<div class="new_event_form">
+  <div class="new_event_title">
+    <h2>Purchase Event Tickets</h2>
   </div>
-</form>
+  <p>Welcome <%= follower[:follower_email] %>. Please enter your information here to secure your ticket!</p>
+  <br>
+  <br>
 
-<form method='post' action="/events/<%= @event_id %>/decline/<%= @follower_id %>" id="decline-form">
-<form>
-<div>
-    <input type="submit" value="Decline" >
-  </div>
-</form>
+  <form method='post' action="/events/<%= @event_id %>/<%= @follower_id %>" id="payment-form" class="form-horizontal">
+
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">Name:</label>
+          <input class="new_event_input" type="text" name="name" required>
+      </div>
+      
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">Ticket Quantity:</label>
+          <input type="number" name="unit_quantity" value=1 class="new_event_input unit_quantity" required>
+      </div> 
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">Credit Card Number:</label>
+          <input class="new_event_input" type="text" data-stripe="number" required>
+      </div>
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">CVC:</label>
+          <input class="new_event_input" type="text" data-stripe="cvc" required>
+      </div>
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">Expiration Month:</label>
+          <input class="new_event_input" type="text" data-stripe="exp-month" required>
+      </div>  
+      <div class="form-group">
+          <label class="col-sm-4 control-label new_event_label">Expiration Year:</label>
+          <input class="new_event_input" type="text" data-stripe="exp-year" required>
+      </div>     
+     
+      <!-- <div class="form-group">
+          <label>Event URL:</label>
+          <input type="text" name="event_url">
+      </div>  -->
+      <div class="form-group">
+          <p class="new_event_input total_price_label"><%= "Unit Price: $" + @unit_price.to_s%>.00</p>
+          <p class="new_event_input total_price_label">Total Price <span class="total_price"></span></p>
+      </div>
+
+      <div class="form-group">
+      <input class="new_event_input submit_button" type="submit" value="Submit" >
+      
+      <form method='post' action="/events/<%= @event_id %>/decline/<%= @follower_id %>" id="decline-form">
+
+        <input class="new_event_input" type="submit" value="Decline" >
+
+      </form>
+  
+      </div>
+  </form>
+
+
+</div>

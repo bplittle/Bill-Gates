@@ -1,10 +1,8 @@
-<br><a href="/events/new">Create a New Event</a>
 
-<h1><u>Your Events</u></h1>
 
-<div>
+<div class="your_events_container">
     <% @leader.events.each do |event| %>
-    <div>
+    <div class="each_event_container">
 
         <br><h3>Event Name: <%= event.event_name %></h3>
         <a href="/events/<%= event.id %>"> Event Details</a>

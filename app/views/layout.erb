@@ -26,34 +26,48 @@
 
   <title>Bill 'Gates'</title>
 </head>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="header-main">
-      <% if session[:leader_id] %>
-        <% leader = Leader.find(session[:leader_id]) %>
-        <h3>Welcome, <%= leader.leader_name %></h3>
-      <% end %>
-      <% if session[:leader_id] %>
-        <nav><button class="navbar-right"><a href="/events">Manage events</a></button></nav>
-        <nav><button class="navbar-right"><a href="/events/new">Create a new event</a></button></nav>
-      <% end %>
-      <nav><button class="navbar-right"><a>About Us</a></button></nav>
-      <nav><button class="navbar-right"><a>FAQ</a></button></nav>
-      <% if session[:leader_id] %>
-        <nav><button class="navbar-left"><a href="/logout">Logout</a></button></nav>
-      <% else %>
-        <nav><button class="navbar-left"><a href="/">Log In</a></button></nav>
-      <% end %>
+<!--  <nav class="navbar navbar-default navbar-fixed-top"> -->
+
+  <div class="header-main">
+    <div id="header_contents_wrapper">
+      
+        <div id="logo">  
+
+        </div>
+      <div class="title_text">
+        <img src="/assets/images/title-text.png">
+      </div>
+      <nav class="navbar-right">
+
+          <% if session[:leader_id] %>
+            <% leader = Leader.find(session[:leader_id]) %>
+            <h3>Welcome, <%= leader.leader_name %></h3>
+          <% end %>
+          <% if session[:leader_id] %>
+            <a href="/events">Manage events</a>
+            <a href="/events/new">Create a new event</a>
+          <% end %>
+          <a>About Us</a>
+          <a>FAQ</a>
+          <% if session[:leader_id] %>
+            <a href="/logout">Logout</a>
+          <% else %>
+            <a href="/">Log In</a>
+          <% end %> 
+      </nav>
     </div>
-  </nav>
+  </div>
 <body>
 <br><br><br><br><br><br><br><br><br><br>
   <%= yield %>
   <br><br>
-</body>
+
   <div>
     <div class="footer-main">
       <p class="footer-text">The Bill Gates App</p>
       <p class="footer-text">Powered by Billify!</p>
     </div>
   </div>
+</body>
+
 </html>

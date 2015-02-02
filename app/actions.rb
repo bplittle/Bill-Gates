@@ -96,7 +96,7 @@ post '/events/new' do
             from_name: new_event.leader.leader_name,
             text: "Want to come to " + new_event.event_name + "?",
             to: [
-                {email: "bplittle@gmail.com",
+                {email: email,
                     name: "Friend of " + new_event.leader.leader_name
                     }],
             html: "<html><h1> Want to come to this event?</h1> 
