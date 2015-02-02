@@ -84,6 +84,7 @@ post '/events/new' do
 
     new_event.save
 
+    # leader = Leader.find(parmas[:leader_id])
     emails = params[:emails].split(', ')
     emails.each do |email|
         follower = Follower.create(follower_email: email, event_id: new_event.id)
@@ -92,14 +93,14 @@ post '/events/new' do
         m = Mandrill::API.new 'ASPCt1fLpFwKfE7g9rMo9Q'
 
         message = {
-            subject: "Want to come to " + new_event.event_name + "?",
+            subject: new_event.leader.leader_name + "has invited you to " + new_event.event_name ,
             from_name: new_event.leader.leader_name,
             text: "Want to come to " + new_event.event_name + "?",
             to: [
-                {email: "bplittle@gmail.com",
+                {email: email,
                     name: "Friend of " + new_event.leader.leader_name
                     }],
-            html: "<html><h1> Want to come to this event?</h1> 
+            html: "<html><h1> Want to come to this event? Visit below url for details: </h1> 
            localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
             from_email: "noreply@billg8.es"
 
