@@ -30,7 +30,10 @@
 
   <div class="header-main">
     <div id="header_contents_wrapper">
-      
+            <% if session[:leader_id] %>
+            <% leader = Leader.find(session[:leader_id]) %>
+            <div class="salutation_text"><p>Welcome, <%= leader.leader_name %></p></div>
+          <% end %>
         <div id="logo">  
 
         </div>
@@ -39,10 +42,7 @@
       </div>
       <nav class="navbar-right">
 
-          <% if session[:leader_id] %>
-            <% leader = Leader.find(session[:leader_id]) %>
-            <h3>Welcome, <%= leader.leader_name %></h3>
-          <% end %>
+
           <% if session[:leader_id] %>
             <a href="/events">Manage events</a>
             <a href="/events/new">Create a new event</a>
@@ -58,7 +58,6 @@
     </div>
   </div>
 <body>
-<br><br><br><br><br><br><br><br><br><br>
   <%= yield %>
   <br><br>
 
