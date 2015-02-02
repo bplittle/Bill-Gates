@@ -103,8 +103,9 @@ post '/events/new' do
             html: "<html><h1> Want to come to " + new_event.event_name + " ?</h1> 
             <br>Location: " + new_event.location + "
             <br>Date: " + new_event.date + "
-            <br>Visit the below url to pre-authorize payback to your friend who will be buying your tickets. Only once they buy and provide you with your ticket will you be charged. 
-            <br>localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
+            <br>Unit Price: " + new_event.unit_price + "
+            <br><br>Visit the below url to pre-authorize payback to your friend who will be buying your tickets. They should only charge you once they have purchased your ticket(s). 
+            <br><br>localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
             from_email: new_event.leader.leader_email
 
         }
@@ -119,7 +120,7 @@ post '/events/new' do
 
 
 
-    redirect '/events/' + new_event.id.to_s
+    redirect '/events'
 
     # binding.pry
     

@@ -1,8 +1,7 @@
 
-<h1><%= @event.event_name %></h1>
-<h3><%= @event.date %></h3>
-<h3><%= @event.time %></h3>
-<h3><%= @event.location %></h3>
+<h2><%= @event.event_name %></h2>
+<h2><%= @event.date %>, <%= @event.time %>
+<%= @event.location %></h2>
 
 <div>
     <% @event.followers.each do |follower| %>
