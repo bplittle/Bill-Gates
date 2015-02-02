@@ -179,10 +179,22 @@ html, body {
   margin-right:5%;
 }
 
+.new_event_meta {
+  table-layout: fixed;
+  width:100%;
+}
+
+.invitees_info {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 25px;
+}
+
 .btn-danger {
   width:100%;
   font-family: helvetica, arial, sans-serif;
   font-size: 16px;
+  min-height: 35px;
 }
 
 .submit_button {

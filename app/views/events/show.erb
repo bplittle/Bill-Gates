@@ -1,36 +1,46 @@
 
-<h1><%= @event.event_name %></h1>
-<h3><%= @event.date %></h3>
-<h3><%= @event.time %></h3>
-<h3><%= @event.location %></h3>
 
-<div>
-    <% @event.followers.each do |follower| %>
+<div class="new_event_form">
+  <div class="new_event_title">
+    <h2>Event: <%= @event.event_name %></h2>
+  </div>
+  
+    <table class="new_event_meta">
+      <tr><td>Date: <%= @event.date %></td>
+          <td>Time: <%= @event.time %></td> 
+          <td>Location: <%= @event.location %></td>
+      </tr>
+    </table>
+  
+  <div class="invitees_info">
+      <% @event.followers.each do |follower| %>
+      <div>
+          <br>Name: <%= follower.follower_name %>
+          <br>Email: <%= follower.follower_email %>
+          <br>Tickets: <%= follower.unit_quantity %>
+          <% if follower.status != nil %>
+             <br> Status: <%= follower.status %>
+          <% end %>
+          <% if follower.status == "confirmed"%>
+            <br> Pre-Authorized Amount: $<%= follower.unit_total_price%>
+          <%end%>
+          <br><br>
+      </div>
+      <% end %>
+      
+  </div>
+
+  <% if @event.captured_status == false %>
     <div>
-        <br>Name: <%= follower.follower_name %>
-        <br>Email: <%= follower.follower_email %>
-        <br>Tickets: <%= follower.unit_quantity %>
-        <% if follower.status != nil %>
-           <br> Status: <%= follower.status %>
-        <% end %>
-        <% if follower.status == "confirmed"%>
-          <br> Pre-Authorized Amount: $<%= follower.unit_total_price%>
-        <%end%>
-        <br><br>
-
-    <% end %>
-    </div>
+      <p style="font-weight: bold; font-size: 16px;">Bought the tickets already? Receive your friends' payments:</p><br>
+      <p style="font-weight: bold; font-size: 16px;">Total amount pre-authorized: $<%=@event.followers.sum(:unit_total_price)%></p>
+      </div>
+    <form style="margin-top: 15px; " method='post' action="/events/<%= @event.id %>">
+    <form>
+        <input class="btn-danger" type="submit" value="Receive Payback" >
+      
+    </form>
+  <% else %>
+    You have captured your friends' payments who have confirmed. Thanks!
+  <% end %>
 </div>
-
-<% if @event.captured_status == false %>
-  <form method='post' action="/events/<%= @event.id %>">
-  <form>
-    <div>
-    <p>Bought the tickets? Receive your friends' payments:</p><br>
-    <p>Total amount pre-authorized: $<%=@event.followers.sum(:unit_total_price)%></p>
-      <input type="submit" value="Receive Payback" >
-    </div>
-  </form>
-<% else %>
-  You have captured your friends' payments who have confirmed. Thanks!
-<% end %>
