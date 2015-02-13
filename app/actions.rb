@@ -43,24 +43,6 @@ post '/leader/new' do
     end
 end
 
-post '/new_user' do
-    # form fields into new user
-
-    # new_leader = Leader.create(
-    #     leader_name: params[:name],
-    #     leader_email: params[:email],
-    #     password: params[:password],
-    #     leader_stripe_key: params[:key])
-
-    # if new_leader.save
-        # session[:leader_id] = new_leader.id
-        # redirect '/home'
-    # else
-    #     redirect '/'
-    # end
-    
-end
-
 get '/events' do
     @leader = Leader.find(session[:leader_id])
     erb :events
@@ -84,7 +66,6 @@ post '/events/new' do
 
     new_event.save
 
-    # leader = Leader.find(parmas[:leader_id])
     emails = params[:emails].split(', ')
     emails.each do |email|
         follower = Follower.create(follower_email: email, event_id: new_event.id)
@@ -103,28 +84,20 @@ post '/events/new' do
             html: "<html><h1> Want to come to " + new_event.event_name + " ?</h1> 
             <br>Location: " + new_event.location + "
             <br>Date: " + new_event.date + "
-            <br>Unit Price: " + new_event.unit_price + "
+            <br>Unit Price: " + new_event.unit_price.to_s + "
             <br><br>Visit the below url to pre-authorize payback to your friend who will be buying your tickets. They should only charge you once they have purchased your ticket(s). 
             <br><br>localhost:3000/events/" << new_event.id.to_s << "/" << follower.id.to_s << "<html>",
             from_email: new_event.leader.leader_email
-
         }
-        # binding.pry
 
         sending = m.messages.send message
-
-        puts sending.inspect
-
 
     end
 
 
-
     redirect '/events'
 
-    # binding.pry
     
-    # Send emails to followers with that event id
 end
 
 
