@@ -71,7 +71,7 @@ post '/events/new' do
         follower = Follower.create(follower_email: email, event_id: new_event.id)
         follower.save
 
-        m = Mandrill::API.new 'ASPCt1fLpFwKfE7g9rMo9Q'
+        m = Mandrill::API.new 'Mandrill Key*******'
 
         message = {
             subject: new_event.leader.leader_name + " has invited you to " + new_event.event_name ,
@@ -135,7 +135,7 @@ post '/events/:event_id/:follower_id' do
     Stripe.api_key = user.leader_stripe_key
     
 
-     # Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+     # Stripe.api_key = "STRIPE API KEY*******"
 
      puts "strike api key received"
 
@@ -175,7 +175,7 @@ post '/events/:event_id' do
     user = Leader.find(session[:leader_id])
     Stripe.api_key = user.leader_stripe_key
 
-	# Stripe.api_key = "sk_test_i4TQCuPANmpmhYs6I9YXgV4m"
+	# Stripe.api_key = "STRIPE KEY********"
 
     event.followers.each do |follower|
          if follower[:stripe_token] != nil   
@@ -189,7 +189,7 @@ post '/events/:event_id' do
     event.save!
 
 
-	# ch = Stripe::Charge.retrieve("ch_15QoUXFR7CapK6EtvYMQZC2P")
+	# ch = Stripe::Charge.retrieve("STRIPE TOKEN")
 	# binding.pry
 	# ch.capture
 
